@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { envisionai } from "./assets";
-import { Home, CreatePost, LandingPage } from "./pages";
+import { Home, CreatePost, LandingPage, LoginPage } from "./pages";
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </main>
 
