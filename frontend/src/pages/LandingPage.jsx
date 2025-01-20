@@ -70,7 +70,7 @@ const LandingPage = () => {
               Start Creating <ArrowRight className="w-5 h-5" />
             </button>
             <button
-              onClick={() => navigate("/explore")}
+              onClick={() => navigate("/home")}
               className="px-6 py-3 border border-[#6469ff] text-[#6469ff] rounded-md font-medium hover:bg-[#6469ff] hover:text-white transition-colors"
             >
               Explore Gallery
