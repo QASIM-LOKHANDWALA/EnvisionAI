@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Loader, Wand2 } from "lucide-react";
+import { useSignup } from "../hooks/useSignup";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const { signup, error, isLoading } = useSignup();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -27,8 +29,7 @@ const SignupPage = () => {
 
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/home");
+      await signup(formData.email, formData.password);
     } catch (error) {
       console.error("Signup error:", error);
       alert("Signup failed. Please try again.");
@@ -38,7 +39,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f9fafe] px-4 py-12">
+    <div className="min-h-full flex items-center justify-center bg-[#f9fafe] px-4 py-12">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         <div className="text-center">
           <div className="flex justify-center">
@@ -114,7 +115,7 @@ const SignupPage = () => {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-[#6469ff] hover:bg-[#5054cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6469ff]"
           >
             {loading ? (
@@ -134,19 +135,11 @@ const SignupPage = () => {
             </Link>
           </div>
         </form>
-
-        <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-[#666e75]">
-                Or sign up with
-              </span>
-            </div>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative">
+            {error}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
