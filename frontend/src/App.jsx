@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { envisionai } from "./assets";
-import { Home, CreatePost, LandingPage, LoginPage } from "./pages";
+import { Home, CreatePost, LandingPage, LoginPage, SignupPage } from "./pages";
 
 const App = () => {
   return (
@@ -10,12 +10,20 @@ const App = () => {
         <Link to="/">
           <img src={envisionai} alt="logo" className="w-28 object-contain" />
         </Link>
-        <Link
-          to="/create-post"
-          className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
-        >
-          Create
-        </Link>
+        <div>
+          <Link
+            to="/login"
+            className="font-inter font-medium bg-teal-700 text-white px-4 py-2 mx-2 rounded-md"
+          >
+            Login
+          </Link>
+          <Link
+            to="/create-post"
+            className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
+          >
+            Create
+          </Link>
+        </div>
       </header>
 
       <main className="sm:p-8 px-4 py-8 w-full bg-[#f9fafe] min-h-[calc(100vh-73px)]">
@@ -24,6 +32,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Routes>
       </main>
 

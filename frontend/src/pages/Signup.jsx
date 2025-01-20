@@ -1,16 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader } from "lucide-react";
+import { Loader, Wand2 } from "lucide-react";
 
-const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24$}/;
-
-const LoginPage = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -22,38 +20,35 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    if(!formData.email.match(EMAIL_REGEX)){
-      setError('Invalid Email!')
-      setLoading(false)
-      return
-    }else if(!formData.password.match(PWD_REGEX)){
-      setError('Invalid Password')
-      setLoading(false)
-      return
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
     }
 
+    setLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       navigate("/home");
     } catch (error) {
-      console.error("Login error:", error);
-      alert("Login failed. Please try again.");
+      console.error("Signup error:", error);
+      alert("Signup failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-full flex items-center justify-center bg-[#f9fafe]">
-      <div className="max-w-md w-full space-y-3 bg-white p-8 rounded-xl shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-[#f9fafe] px-4 py-12">
+      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         <div className="text-center">
-          <h2 className="text-4xl font-extrabold text-[#222328]">
-            Welcome Back
+          <div className="flex justify-center">
+            <Wand2 className="h-12 w-12 text-[#6469ff]" />
+          </div>
+          <h2 className="mt-4 text-4xl font-extrabold text-[#222328]">
+            Join EnvisionAI
           </h2>
           <p className="mt-2 text-[#666e75]">
-            Sign in to continue your creative journey
+            Start your creative journey with AI-powered image generation
           </p>
         </div>
 
@@ -91,36 +86,29 @@ const LoginPage = () => {
                 type="password"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6469ff] focus:border-[#6469ff]"
-                placeholder="Enter your password"
+                placeholder="Create a password"
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
-          </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-[#6469ff] focus:ring-[#6469ff] border-gray-300 rounded"
-              />
+            <div>
               <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-[#666e75]"
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-[#222328]"
               >
-                Remember me
+                Confirm Password
               </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-[#6469ff] hover:text-[#5054cc]"
-              >
-                Forgot password?
-              </a>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6469ff] focus:border-[#6469ff]"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
@@ -129,22 +117,39 @@ const LoginPage = () => {
             disabled={loading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-[#6469ff] hover:bg-[#5054cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6469ff]"
           >
-            {loading ? <Loader className="w-5 h-5 animate-spin" /> : "Sign In"}
+            {loading ? (
+              <Loader className="w-5 h-5 animate-spin" />
+            ) : (
+              "Create Account"
+            )}
           </button>
 
           <div className="text-center text-sm text-[#666e75]">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <Link
-              to="/signup"
+              to="/login"
               className="font-medium text-[#6469ff] hover:text-[#5054cc]"
             >
-              Sign up for free
+              Sign in
             </Link>
           </div>
         </form>
+
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-[#666e75]">
+                Or sign up with
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;
