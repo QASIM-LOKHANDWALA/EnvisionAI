@@ -59,7 +59,7 @@ const CreatePost = () => {
         });
 
         await response.json();
-        navigate("/");
+        navigate("/home");
       } catch (error) {
         alert(error);
       } finally {

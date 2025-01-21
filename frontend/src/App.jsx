@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Navigate, Link, Route, Routes } from "react-router-dom";
 import { envisionai } from "./assets";
 import { Home, CreatePost, LandingPage, LoginPage, SignupPage } from "./pages";
 import { useLogout } from "./hooks/useLogout";
@@ -50,10 +50,22 @@ const App = () => {
       <main className="sm:p-8 px-4 py-8 w-full bg-[#f9fafe] min-h-[calc(100vh-73px)]">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/home"
+            element={user ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/create-post"
+            element={user ? <CreatePost /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <LoginPage /> : <Navigate to="/home" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <SignupPage /> : <Navigate to="/home" />}
+          />
         </Routes>
       </main>
 
