@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { envisionai } from "./assets";
 import { Home, CreatePost, LandingPage, LoginPage, SignupPage } from "./pages";
 import { useLogout } from "./hooks/useLogout";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 const App = () => {
   const { logout } = useLogout();
@@ -10,26 +11,39 @@ const App = () => {
     logout();
   };
 
+  const { user } = useAuthContext();
+
   return (
     <>
-      <header className="w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]">
+      <header className="w-full flex justify-between items-center bg-white sm:px-10 px-6 py-4 border-b border-b-[#e6ebf4] shadow-md rounded-b-lg">
         <Link to="/">
           <img src={envisionai} alt="logo" className="w-28 object-contain" />
         </Link>
-        <div>
-          <button onClick={handelClick}>Logout</button>
-          <Link
-            to="/login"
-            className="font-inter font-medium bg-teal-700 text-white px-4 py-2 mx-2 rounded-md"
-          >
-            Login
-          </Link>
-          <Link
-            to="/create-post"
-            className="font-inter font-medium bg-[#6469ff] text-white px-4 py-2 rounded-md"
-          >
-            Create
-          </Link>
+        <div className="flex items-center space-x-4">
+          {user && (
+            <button
+              onClick={handelClick}
+              className="font-inter font-medium text-gray-700 hover:text-gray-900 px-4 py-2 transition-all"
+            >
+              Logout
+            </button>
+          )}
+          {!user && (
+            <Link
+              to="/login"
+              className="font-inter font-medium bg-teal-700 text-white px-5 py-2 rounded-md hover:bg-teal-600 transition-all"
+            >
+              Login
+            </Link>
+          )}
+          {user && (
+            <Link
+              to="/create-post"
+              className="font-inter font-medium bg-[#6469ff] text-white px-5 py-2 rounded-md hover:bg-[#4f54cc] transition-all"
+            >
+              Create
+            </Link>
+          )}
         </div>
       </header>
 

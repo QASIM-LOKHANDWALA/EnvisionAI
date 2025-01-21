@@ -30,6 +30,7 @@ const SignupPage = () => {
     setLoading(true);
     try {
       await signup(formData.email, formData.password);
+      navigate("/home");
     } catch (error) {
       console.error("Signup error:", error);
       alert("Signup failed. Please try again.");

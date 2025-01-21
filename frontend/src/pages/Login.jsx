@@ -35,7 +35,7 @@ const LoginPage = () => {
     try {
       await login(formData.email, formData.password);
 
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
       console.error("Login error:", error);
       alert("Login failed. Please try again.");
