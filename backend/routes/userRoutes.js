@@ -56,6 +56,9 @@ router.post("/signup", async (req, res) => {
 
     const user = await UserSchema.create({ email, password: hash });
     const token = createToken(user._id);
+
+    console.log(user);
+
     res.status(200).json({ email, token, success: true });
   } catch (error) {
     res.status(400).json({ error: error.message, success: false });
