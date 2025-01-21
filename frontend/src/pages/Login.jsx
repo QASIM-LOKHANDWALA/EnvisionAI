@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Loader } from "lucide-react";
+import { useLogin } from "../hooks/useLogin";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24$}/;
@@ -13,6 +14,8 @@ const LoginPage = () => {
     password: "",
   });
 
+  const { login, error, isLoading } = useLogin();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,19 +27,15 @@ const LoginPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    if(!formData.email.match(EMAIL_REGEX)){
-      setError('Invalid Email!')
-      setLoading(false)
-      return
-    }else if(!formData.password.match(PWD_REGEX)){
-      setError('Invalid Password')
-      setLoading(false)
-      return
+    if (!formData.email.match(EMAIL_REGEX)) {
+      setLoading(false);
+      return;
     }
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/home");
+      await login(formData.email, formData.password);
+
+      // navigate("/home");
     } catch (error) {
       console.error("Login error:", error);
       alert("Login failed. Please try again.");
@@ -126,7 +125,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-white bg-[#6469ff] hover:bg-[#5054cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6469ff]"
           >
             {loading ? <Loader className="w-5 h-5 animate-spin" /> : "Sign In"}
@@ -142,6 +141,11 @@ const LoginPage = () => {
             </Link>
           </div>
         </form>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );
