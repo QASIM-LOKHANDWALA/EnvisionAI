@@ -14,7 +14,7 @@ const LandingPage = () => {
       const result = await response.json();
 
       if (result.success) {
-        setPosts(result.data.slice(0, 3));
+        setPosts(result.data.reverse().slice(0, 3));
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
