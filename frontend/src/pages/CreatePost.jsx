@@ -102,30 +102,6 @@ const CreatePost = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <Sparkles className="w-8 h-8 text-purple-500 mb-3" />
-            <h3 className="font-semibold text-gray-900">AI-Powered Creation</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Transform your ideas into stunning artwork with advanced AI
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <Download className="w-8 h-8 text-teal-500 mb-3" />
-            <h3 className="font-semibold text-gray-900">Instant Download</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Get your creations in high quality with one click
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <Share2 className="w-8 h-8 text-blue-500 mb-3" />
-            <h3 className="font-semibold text-gray-900">Community Sharing</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Share your artwork with our creative community
-            </p>
-          </div>
-        </div>
-
         <div className="bg-white rounded-xl shadow-lg border border-gray-200">
           <div className="border-b border-gray-200 bg-gray-50 rounded-t-xl px-8 py-4">
             <h2 className="text-xl font-semibold text-gray-900">

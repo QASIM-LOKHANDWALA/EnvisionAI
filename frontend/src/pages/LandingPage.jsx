@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Loader, Wand2, Users, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -52,16 +53,25 @@ const LandingPage = () => {
     <div className="min-h-screen">
       <section className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-5xl font-extrabold text-[#222328] sm:text-6xl">
-            Transform Your
-            <span className="text-[#6469ff]"> Imagination </span>
+          <motion.h1
+            className="text-5xl font-extrabold text-[#222328] sm:text-6xl"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            Transform Your <span className="text-[#6469ff]">Imagination</span>{" "}
             Into Reality
-          </h1>
-          <p className="mt-6 text-lg text-[#666e75] max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p
+            className="mt-6 text-lg text-[#666e75] max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
+          >
             Create stunning, unique images with the power of AI. Turn your ideas
             into artwork with just a few words. Join our creative community and
             start generating masterpieces today.
-          </p>
+          </motion.p>
           <div className="mt-10 flex gap-4 justify-center">
             <button
               onClick={() => navigate("/create-post")}
