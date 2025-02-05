@@ -4,6 +4,8 @@ import { envisionai } from "./assets";
 import { Home, CreatePost, LandingPage, LoginPage, SignupPage } from "./pages";
 import { useLogout } from "./hooks/useLogout";
 import { useAuthContext } from "./hooks/useAuthContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 const App = () => {
   const { logout } = useLogout();
@@ -69,57 +71,34 @@ const App = () => {
         </Routes>
       </main>
 
-      <footer className="footer bg-white border-t border-gray-200">
-        <div className="container mx-auto py-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <footer className="bg-white border-t border-gray-200">
+        <div className="container mx-auto px-6 py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             <div>
-              <img
-                src={envisionai}
-                alt="logo"
-                className="footer-logo mb-4 h-8"
-              />
-              <p className="text-gray-600 mb-4">
+              <img src={envisionai} alt="logo" className="mb-4 h-10" />
+              <p className="text-gray-600 mb-4 text-sm">
                 Transform your ideas into stunning AI-generated artwork. Join
                 our creative community and explore the endless possibilities of
                 AI-powered image generation.
               </p>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="social-link flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-500 hover:text-white hover:-translate-y-0.5 transition"
-                  aria-label="Visit our Facebook page"
-                >
-                  <i className="bi bi-facebook"></i>
-                </a>
-                <a
-                  href="#"
-                  className="social-link flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-500 hover:text-white hover:-translate-y-0.5 transition"
-                  aria-label="Follow us on Twitter"
-                >
-                  <i className="bi bi-twitter"></i>
-                </a>
-                <a
-                  href="#"
-                  className="social-link flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-500 hover:text-white hover:-translate-y-0.5 transition"
-                  aria-label="Follow us on Instagram"
-                >
-                  <i className="bi bi-instagram"></i>
-                </a>
-                <a
-                  href="#"
-                  className="social-link flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-500 hover:text-white hover:-translate-y-0.5 transition"
-                  aria-label="Join our Discord"
-                >
-                  <i className="bi bi-discord"></i>
-                </a>
+              <div className="flex space-x-3">
+                {["facebook", "twitter", "instagram", "discord"].map(
+                  (platform) => (
+                    <a
+                      key={platform}
+                      href="#"
+                      className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-500 hover:text-white transition"
+                      aria-label={`Follow us on ${platform}`}
+                    >
+                      <i className={`bi bi-${platform} text-xl`}></i>
+                    </a>
+                  )
+                )}
               </div>
             </div>
-
             <div>
-              <h5 className="footer-title text-gray-800 font-semibold mb-5">
-                Quick Links
-              </h5>
-              <ul className="footer-links space-y-3">
+              <h5 className="text-gray-800 font-semibold mb-4">Quick Links</h5>
+              <ul className="space-y-2">
                 <li>
                   <Link to="/" className="text-gray-600 hover:text-indigo-500">
                     Home
@@ -135,99 +114,51 @@ const App = () => {
                 </li>
               </ul>
             </div>
-
             <div>
-              <h5 className="footer-title text-gray-800 font-semibold mb-5">
-                Resources
-              </h5>
-              <ul className="footer-links space-y-3">
-                <li>
-                  <a href="#" className="text-gray-600 hover:text-indigo-500">
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-600 hover:text-indigo-500">
-                    Tutorials
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-600 hover:text-indigo-500">
-                    API Reference
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-600 hover:text-indigo-500">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-600 hover:text-indigo-500">
-                    Help Center
-                  </a>
-                </li>
+              <h5 className="text-gray-800 font-semibold mb-4">Resources</h5>
+              <ul className="space-y-2">
+                {[
+                  "Documentation",
+                  "Tutorials",
+                  "API Reference",
+                  "Blog",
+                  "Help Center",
+                ].map((resource) => (
+                  <li key={resource}>
+                    <a href="#" className="text-gray-600 hover:text-indigo-500">
+                      {resource}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
-
             <div>
-              <h5 className="footer-title text-gray-800 font-semibold mb-5">
-                Stay Updated
-              </h5>
-              <p className="text-gray-600 mb-4">
-                Subscribe to our newsletter for the latest updates and AI art
-                trends.
-              </p>
-              <div className="flex">
-                <input
-                  type="email"
-                  className="form-control border border-gray-300 rounded-l-md focus:ring-indigo-500 focus:border-indigo-500 flex-grow"
-                  placeholder="Enter your email"
-                  aria-label="Email for newsletter"
-                />
-                <button
-                  className="btn bg-indigo-500 text-white px-4 rounded-r-md hover:bg-indigo-600"
-                  type="button"
-                >
-                  Subscribe
-                </button>
-              </div>
-              <div className="contact-info mt-6 space-y-2 text-sm text-gray-600">
+              <h5 className="text-gray-800 font-semibold mb-4">Contact Us.</h5>
+              <div className="text-sm text-gray-600">
                 <p>
                   <i className="bi bi-envelope-fill mr-2"></i>
                   support@envisionai.com
                 </p>
                 <p>
-                  <i className="bi bi-geo-alt-fill mr-2"></i>
-                  Dahod - 389151, Gujarat, India.
+                  <i className="bi bi-geo-alt-fill mr-2"></i>Dahod - 389151,
+                  Gujarat, India.
                 </p>
               </div>
             </div>
           </div>
-
-          <div className="footer-bottom mt-10">
-            <hr className="my-4 border-gray-300" />
-            <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-600">
-              <p className="text-center md:text-left">
-                © 2025 EnvisionAI. All rights reserved.
-              </p>
-              <ul className="legal-links flex space-x-4 mt-4 md:mt-0">
-                <li>
-                  <a href="#" className="hover:text-indigo-500">
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-indigo-500">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-indigo-500">
-                    Cookie Policy
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <div className="mt-10 border-t border-gray-300 pt-4 text-sm text-gray-600 text-center md:flex md:justify-between">
+            <p>© 2025 EnvisionAI. All rights reserved.</p>
+            <ul className="flex justify-center space-x-4 mt-3 md:mt-0">
+              {["Terms of Service", "Privacy Policy", "Cookie Policy"].map(
+                (policy) => (
+                  <li key={policy}>
+                    <a href="#" className="hover:text-indigo-500">
+                      {policy}
+                    </a>
+                  </li>
+                )
+              )}
+            </ul>
           </div>
         </div>
       </footer>
